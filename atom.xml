@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://devnodecl.github.io/atom.xml" rel="self"/>
-  <link href="http://devnodecl.github.io/"/>
-  <updated>2014-04-02T01:28:23-03:00</updated>
-  <id>http://devnodecl.github.io/</id>
+  <title><![CDATA[devnode]]></title>
+  <link href="http://devnode.cl/atom.xml" rel="self"/>
+  <link href="http://devnode.cl/"/>
+  <updated>2014-04-02T01:35:17-03:00</updated>
+  <id>http://devnode.cl/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[devnode.cl]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
