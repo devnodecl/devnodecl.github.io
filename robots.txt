@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://devnode.cl/sitemap.xml 
