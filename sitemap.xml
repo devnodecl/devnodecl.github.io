@@ -6,23 +6,14 @@
     </url>
     <url>
         <loc>http://devnode.cl/robots.txt</loc>
-        <lastmod>2014-04-03T15:14:25-03:00</lastmod>
+        <lastmod>2014-04-02T00:58:39-03:00</lastmod>
     </url>
     <url>
-<<<<<<< HEAD
         <loc>http://devnode.cl/</loc>
         <lastmod>2014-04-06T10:56:51-03:00</lastmod>
     </url>
     <url>
         <loc>http://devnode.cl/blog/archives/</loc>
         <lastmod>2014-04-06T10:56:51-03:00</lastmod>
-=======
-        <loc>http://devnode.cl/blog/archives/</loc>
-        <lastmod>2014-04-03T15:14:25-03:00</lastmod>
-    </url>
-    <url>
-        <loc>http://devnode.cl/</loc>
-        <lastmod>2014-04-03T15:14:25-03:00</lastmod>
->>>>>>> ccedfabd7d00c8287d94153927e30da3dd5e9d1c
     </url>
 </urlset>
