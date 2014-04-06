@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Android | Devnode Blog]]></title>
+  <title><![CDATA[Categoría: Android | Devnode Blog]]></title>
   <link href="http://devnode.cl/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://devnode.cl/"/>
-  <updated>2014-04-06T12:35:29-03:00</updated>
+  <updated>2014-04-06T14:21:18-03:00</updated>
   <id>http://devnode.cl/</id>
   <author>
     <name><![CDATA[devnode.cl]]></name>
