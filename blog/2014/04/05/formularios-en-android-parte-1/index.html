@@ -1,24 +1,97 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Devnode Blog]]></title>
-  <link href="http://devnode.cl/atom.xml" rel="self"/>
-  <link href="http://devnode.cl/"/>
-  <updated>2014-04-06T10:57:22-03:00</updated>
-  <id>http://devnode.cl/</id>
-  <author>
-    <name><![CDATA[devnode.cl]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Formularios en Android (Parte 1) - Devnode Blog</title>
+  <meta name="author" content="devnode.cl">
 
   
-  <entry>
-    <title type="html"><![CDATA[Formularios en Android (Parte 1)]]></title>
-    <link href="http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1/"/>
-    <updated>2014-04-05T18:03:51-03:00</updated>
-    <id>http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1</id>
-    <content type="html"><![CDATA[<p>Estaba relajado en la playa.. mentira, estaba en la oficina, en mi escritorio, y en el backlog de mi proyecto actual aparecieron un grupo de formularios. Como buen ente pensante, antes de destrozar el teclado pariendo líneas de código a lo bestia y gracias a que todavía no estaba cerca de deadline (porque todos sabemos que pasa cerca del deadline), medité sobre las mejores formas de implementar los formularios tanto desde el punto de vista del usuario, como del pobre infeliz que tenga que mantener el código (que probablemente sea yo mismo en un par de meses).</p>
+  <meta name="description" content="Estaba relajado en la playa.. mentira, estaba en la oficina, en mi escritorio, y en el backlog de mi proyecto actual aparecieron un grupo de &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Devnode Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Devnode Blog</a></h1>
+  
+    <h2>Nuestro aporte a la comunidad dev.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:devnode.cl" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Formularios en Android (Parte 1)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-05T18:03:51-03:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Estaba relajado en la playa.. mentira, estaba en la oficina, en mi escritorio, y en el backlog de mi proyecto actual aparecieron un grupo de formularios. Como buen ente pensante, antes de destrozar el teclado pariendo líneas de código a lo bestia y gracias a que todavía no estaba cerca de deadline (porque todos sabemos que pasa cerca del deadline), medité sobre las mejores formas de implementar los formularios tanto desde el punto de vista del usuario, como del pobre infeliz que tenga que mantener el código (que probablemente sea yo mismo en un par de meses).</p>
 
 <blockquote><p>Oye, pero los formularios son algo muy simple.</p></blockquote>
 
@@ -35,11 +108,11 @@
 <p>El primer paso es el layout. Para los formularios creo que el TableLayout es la mejor opción, utilizando weight para controlar el ancho de los elementos.
 Utilizaré el siguiente layout básico.</p>
 
-<p><img src="http://devnode.cl/images/android-forms-parte1/form.png" title="Form" ></p>
+<p><img src="/images/android-forms-parte1/form.png" title="Form" ></p>
 
 <p>Bien simple. La estructura es esta:</p>
 
-<p><img src="http://devnode.cl/images/android-forms-parte1/estructura-form.png" title="Estructura" ></p>
+<p><img src="/images/android-forms-parte1/estructura-form.png" title="Estructura" ></p>
 
 <p>Show me the code.</p>
 
@@ -299,7 +372,119 @@ Utilizaré el siguiente layout básico.</p>
 
 
 <p>Hasta acá llega el layout y el primer artículo, en la segunda parte veremos la lógica para validación y visualización de errores.</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-</feed>
+
+<span class="byline author vcard">Posted by <span class="fn">Eduardo Vásquez</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-05T18:03:51-03:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1/" data-via="" data-counturl="http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/05/formularios-en-android-parte-1/">Formularios en Android (Parte 1)</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - devnode.cl -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

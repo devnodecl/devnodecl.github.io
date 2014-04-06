@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Android | Devnode Blog]]></title>
+  <link href="http://devnode.cl/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://devnode.cl/"/>
+  <updated>2014-04-06T10:57:22-03:00</updated>
+  <id>http://devnode.cl/</id>
+  <author>
+    <name><![CDATA[devnode.cl]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Formularios en Android (Parte 1)]]></title>
+    <link href="http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1/"/>
+    <updated>2014-04-05T18:03:51-03:00</updated>
+    <id>http://devnode.cl/blog/2014/04/05/formularios-en-android-parte-1</id>
+    <content type="html"><![CDATA[<p>Estaba relajado en la playa.. mentira, estaba en la oficina, en mi escritorio, y en el backlog de mi proyecto actual aparecieron un grupo de formularios. Como buen ente pensante, antes de destrozar el teclado pariendo líneas de código a lo bestia y gracias a que todavía no estaba cerca de deadline (porque todos sabemos que pasa cerca del deadline), medité sobre las mejores formas de implementar los formularios tanto desde el punto de vista del usuario, como del pobre infeliz que tenga que mantener el código (que probablemente sea yo mismo en un par de meses).</p>
+
+<p><blockquote><p>Oye, pero los formularios son algo muy simple.</p></blockquote></p>
+
+<p>Perdón, gran gurú, claro que son algo simple, pero hay muchas opciones y buenas prácticas, un poco más escondidas que arrastrar los íconos del editor al layout.</p>
+
+<p>Aquí recopilaré mis descubrimientos, con la esperanza de hacerle la vida más fácil a algún otro desarrollador encadenado a la pata del escritorio.</p>
+
+<!-- more -->
+
+
+<h3>Layout</h3>
+
+<p>El primer paso es el layout. Para los formularios creo que el TableLayout es la mejor opción, utilizando weight para controlar el ancho de los elementos.
+Utilizaré el siguiente layout básico.</p>
+
+<p><img src="/images/android-forms-parte1/form.png" title="Form" ></p>
+
+<p>Bien simple. La estructura es esta:</p>
+
+<p><img src="/images/android-forms-parte1/estructura-form.png" title="Estructura" ></p>
+
+<p>Show me the code.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span><span class="ni">&amp;lt;</span>LinearLayout xmlns:android=<span class="ni">&amp;ldquo;</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>http://schemas.android.com/apk/res/android<span class="nt">&lt;/a&gt;</span><span class="ni">&amp;rdquo;</span><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span>android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+</span><span class='line'>android:layout_height=&quot;wrap_content&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>TableLayout
+</span><span class='line'>    android:layout_width=&quot;fill_parent&quot;
+</span><span class='line'>    android:layout_height=&quot;fill_parent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>TableRow
+</span><span class='line'>        android:layout_width=&quot;fill_parent&quot;
+</span><span class='line'>        android:layout_height=&quot;fill_parent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>TextView
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;2&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+</span><span class='line'>            android:text=&quot;@string/emailTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>EditText
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;3&quot;
+</span><span class='line'>            android:hint=&quot;@string/emailHint&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:id=&quot;@+id/emailTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/TableRow<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>TableRow
+</span><span class='line'>        android:layout_width=&quot;fill_parent&quot;
+</span><span class='line'>        android:layout_height=&quot;fill_parent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>TextView
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;2&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+</span><span class='line'>            android:text=&quot;@string/telefonoTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>EditText
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;3&quot;
+</span><span class='line'>            android:hint=&quot;@string/telefonoHint&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:id=&quot;@+id/telefonoTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/TableRow<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>TableRow
+</span><span class='line'>        android:layout_width=&quot;fill_parent&quot;
+</span><span class='line'>        android:layout_height=&quot;fill_parent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>TextView
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;2&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+</span><span class='line'>            android:text=&quot;@string/frutaTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>EditText
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;3&quot;
+</span><span class='line'>            android:hint=&quot;@string/frutasHint&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:id=&quot;@+id/frutaTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/TableRow<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>TableRow
+</span><span class='line'>        android:layout_width=&quot;fill_parent&quot;
+</span><span class='line'>        android:layout_height=&quot;fill_parent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>TextView
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;2&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+</span><span class='line'>            android:text=&quot;@string/colorTxt&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>Spinner
+</span><span class='line'>            android:layout_width=&quot;0dp&quot;
+</span><span class='line'>            android:layout_weight=&quot;3&quot;
+</span><span class='line'>            android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>            android:id=&quot;@+id/colorSpinner&quot;
+</span><span class='line'>            android:entries=&quot;@array/colorEntries&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/TableRow<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>/TableLayout<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>Button
+</span><span class='line'>    android:layout_width=&quot;wrap_content&quot;
+</span><span class='line'>    android:layout_height=&quot;wrap_content&quot;
+</span><span class='line'>    android:layout_gravity=&quot;right&quot;
+</span><span class='line'>    android:text=&quot;@string/guardarBtn&quot;
+</span><span class='line'>    android:id=&quot;@+id/guardarBtn&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>InputTypes</h3>
+
+<p>Como se habrán dado cuenta, a veces usando sus smartphones de 80 nucleos con pantalla de 22’’, el teléfono muestra distintos tipos de teclado según el tipo del campo del formulario. por ejemplo, existe un teclado para emails, el numérico, normal de texto, fechas, entre muchos otros.</p>
+
+<p>Pero para que sus bestias de celulares entiendan qué teclado mostrar, debemos agregar una propiedad a cada campo. Por ejemplo al campo de email, le agregamos:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:inputType=<span class="ni">&amp;ldquo;</span>textEmailAddress<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Que cambia el teclado a este tipo:</p>
+
+<p><img class="<a" src="href="http://developer.android.com/images/ui/edittext-email.png">http://developer.android.com/images/ui/edittext-email.png</a>" title="Teclado Email" ></p>
+
+<p>Y al campo de teléfono:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:inputType=<span class="ni">&amp;ldquo;</span>phone<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Que queda así:</p>
+
+<p><img class="<a" src="href="http://developer.android.com/images/ui/edittext-phone.png">http://developer.android.com/images/ui/edittext-phone.png</a>" title="Teclado Teléfono" ></p>
+
+<p>La lista completa está acá: <a href="http://developer.android.com/reference/android/text/InputType.html" title="InputType | Andoroid Developers">InputType | Andoroid Developers</a></p>
+
+<h3>Ya, y que más</h3>
+
+<p>Luego de los InputTypes, podemos agregar algunas opciones para que el usuario no nos juegue una mala pasada:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:singleLine=<span class="ni">&amp;ldquo;</span>true<span class="ni">&amp;rdquo;</span>
+</span><span class='line'>android:maxLength=<span class="ni">&amp;ldquo;</span>20<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>La primera sirve para que el campo no ocupe dos líneas si es que el usuario se excede del espacio, y la segunda controla que el usuario no ingrese más de 20 caracteres.</p>
+
+<p>También podemos agregar una acción en el teclado. Generalmente si el último input es de tipo texto, podemos agregarle al teclado un botón para enviar el formulario.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:imeOptions=<span class="ni">&amp;ldquo;</span>actionSend<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><img class="right <a" src="href="http://developer.android.com/images/ui/edittext-actionsend.png">http://developer.android.com/images/ui/edittext-actionsend.png</a>" title="Boton Enviar" ></p>
+
+<p>Luego debemos capturar la acción al presionar ese botón con un listener, pero eso queda para el lado de la lógica.</p>
+
+<p>A ese botón se le puede cambiar el texto.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:imeActionLabel=<span class="ni">&amp;ldquo;</span>@string/enviar<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Otra opción, es que el teclado en modo landscape no cubra toda la pantalla, para eso hay que agregar</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>android:imeOptions=<span class="ni">&amp;ldquo;</span>flagNoExtractUi<span class="ni">&amp;rdquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Hasta acá llega el layout y el primer artículo, en la segunda parte veremos la lógica para validación y visualización de errores.</p>
+]]></content>
+  </entry>
+  
+</feed>
